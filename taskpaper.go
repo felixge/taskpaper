@@ -21,6 +21,8 @@ type Item struct {
 	// Children is the list of all items that are indented by at least one tab
 	// below the current item.
 	Children []*Item
+
+	Parent *Item `json:"-"`
 }
 
 type Kind string
@@ -59,6 +61,7 @@ func Unmarshal(data []byte) (*Item, error) {
 	}
 
 	addItem := func() {
+		item.Parent = dst
 		item.Content = string(content)
 		item.Indent = indent
 		if item.Kind == Note && strings.HasSuffix(item.Content, ":") {
