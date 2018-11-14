@@ -7,10 +7,19 @@ import (
 	"strings"
 )
 
+// Item is a line item in a TaskPaper document.
 type Item struct {
-	Kind     Kind
-	Content  string
-	Indent   int
+	// Kind is the item kind.
+	Kind Kind
+	// Content is the item text, not including the "- " prefix for Kind=Task or
+	// the ":" suffix for Kind=Project.
+	Content string
+	// Indent is the amount of additional tabs the original item was indented by
+	// if it's more than the single tab that establishes it as a child of the
+	// previous line item.
+	Indent int
+	// Children is the list of all items that are indented by at least one tab
+	// below the current item.
 	Children []*Item
 }
 
@@ -106,13 +115,13 @@ func Unmarshal(data []byte) (*Item, error) {
 	return doc, nil
 }
 
-func Marshal(d *Item) ([]byte, error) {
-	if d.Kind != Document {
+func Marshal(doc *Item) ([]byte, error) {
+	if doc.Kind != Document {
 		return nil, errors.New("Item is not a Document")
 	}
 
 	out := bytes.NewBuffer(nil)
-	err := marshal(out, d, 0)
+	err := marshal(out, doc, 0)
 	return out.Bytes(), err
 }
 
