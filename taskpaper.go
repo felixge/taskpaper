@@ -120,6 +120,8 @@ func marshal(out *bytes.Buffer, item *Item, depth int) error {
 		switch child.Kind {
 		case Task:
 			out.WriteString("- " + child.Content)
+		case Note:
+			out.WriteString(child.Content)
 		default:
 			return fmt.Errorf("Item has invalid kind: %q", child.Kind)
 		}
