@@ -1,0 +1,58 @@
+{
+  "Kind": "document",
+  "Content": "",
+  "Indent": 0,
+  "Children": [
+    {
+      "Kind": "task",
+      "Content": "A",
+      "Indent": 0,
+      "Children": [
+        {
+          "Kind": "task",
+          "Content": "B",
+          "Indent": 0,
+          "Children": null
+        },
+        {
+          "Kind": "task",
+          "Content": "C",
+          "Indent": 0,
+          "Children": [
+            {
+              "Kind": "task",
+              "Content": "D",
+              "Indent": 0,
+              "Children": [
+                {
+                  "Kind": "task",
+                  "Content": "E",
+                  "Indent": 0,
+                  "Children": null
+                }
+              ]
+            },
+            {
+              "Kind": "task",
+              "Content": "F",
+              "Indent": 0,
+              "Children": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Kind": "task",
+      "Content": "G",
+      "Indent": 0,
+      "Children": null
+    },
+    {
+      "Kind": "task",
+      "Content": "H",
+      "Indent": 0,
+      "Children": null
+    }
+  ]
+}

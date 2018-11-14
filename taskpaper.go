@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
+	"strings"
 )
 
 type Item struct {
@@ -51,6 +52,10 @@ func Unmarshal(data []byte) (*Item, error) {
 	addItem := func() {
 		item.Content = string(content)
 		item.Indent = indent
+		if item.Kind == Note && strings.HasSuffix(item.Content, ":") {
+			item.Content = strings.TrimSuffix(item.Content, ":")
+			item.Kind = Project
+		}
 		dst.Children = append(dst.Children, item)
 		reset()
 	}
@@ -118,6 +123,8 @@ func marshal(out *bytes.Buffer, item *Item, depth int) error {
 		}
 		out.Write(bytes.Repeat([]byte("\t"), depth+child.Indent))
 		switch child.Kind {
+		case Project:
+			out.WriteString(child.Content + ":")
 		case Task:
 			out.WriteString("- " + child.Content)
 		case Note:

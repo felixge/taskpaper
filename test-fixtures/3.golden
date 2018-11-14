@@ -1,0 +1,13 @@
+{
+  "Kind": "document",
+  "Content": "",
+  "Indent": 0,
+  "Children": [
+    {
+      "Kind": "project",
+      "Content": "My Project",
+      "Indent": 0,
+      "Children": null
+    }
+  ]
+}
