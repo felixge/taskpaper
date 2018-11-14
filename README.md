@@ -3,6 +3,9 @@
 This library implements the [TaskPaper](https://www.taskpaper.com/) file format
 in [Go](https://golang.org/).
 
+[![GoDoc](https://godoc.org/github.com/felixge/taskpaper?status.svg)](https://godoc.org/github.com/felixge/taskpaper)
+[![Build Status](https://travis-ci.org/felixge/taskpaper.svg?branch=master)](https://travis-ci.org/felixge/taskpaper)
+
 # Usage
 
 Below is a short example program that parses TaskPaper document and shows
