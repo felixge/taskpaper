@@ -25,23 +25,18 @@ fmt.Printf("%s\n", data)
 ```json
 {
   "Kind": "document",
-  "Content": "",
-  "Indent": 0,
   "Children": [
     {
       "Kind": "project",
       "Content": "My Project",
-      "Indent": 0,
       "Children": [
         {
           "Kind": "task",
           "Content": "Task A",
-          "Indent": 0,
           "Children": [
             {
               "Kind": "task",
               "Content": "Task B",
-              "Indent": 0,
               "Children": null
             }
           ]
@@ -49,12 +44,10 @@ fmt.Printf("%s\n", data)
         {
           "Kind": "task",
           "Content": "Task C",
-          "Indent": 0,
           "Children": [
             {
               "Kind": "note",
               "Content": "Some note for Task C",
-              "Indent": 0,
               "Children": null
             }
           ]

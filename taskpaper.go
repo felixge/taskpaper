@@ -13,11 +13,11 @@ type Item struct {
 	Kind Kind
 	// Content is the item text, not including the "- " prefix for Kind=Task or
 	// the ":" suffix for Kind=Project.
-	Content string
+	Content string `json:",omitempty"`
 	// Indent is the amount of additional tabs the original item was indented by
 	// if it's more than the single tab that establishes it as a child of the
 	// previous line item.
-	Indent int
+	Indent int `json:",omitempty"`
 	// Children is the list of all items that are indented by at least one tab
 	// below the current item.
 	Children []*Item
