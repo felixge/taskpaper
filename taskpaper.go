@@ -25,13 +25,19 @@ type Item struct {
 	Parent *Item `json:"-"`
 }
 
+// Kind specifies the type of an Item.
 type Kind string
 
 const (
+	// Document is the kind of the top-level item holding the contents of a
+	// TaskPaper document.
 	Document Kind = "document"
-	Project  Kind = "project"
-	Task     Kind = "task"
-	Note     Kind = "note"
+	// Project is a project item, i.e. a line that ended with ":".
+	Project Kind = "project"
+	// Task is a task item, i.e. a line that starts with "- " after indentation.
+	Task Kind = "task"
+	// Note is a note item, i.e. any other line that is not a Project or Task.
+	Note Kind = "note"
 )
 
 type parseState string
@@ -42,6 +48,9 @@ const (
 	parseContent    parseState = "content"
 )
 
+// Unmarshal parses the given data as a TaskPaper document (see ABNF in README)
+// and returns an Item with Kind=Document that holds the structure of the file
+// or an error.
 func Unmarshal(data []byte) (*Item, error) {
 	var (
 		doc     = &Item{Kind: Document}
@@ -115,6 +124,8 @@ func Unmarshal(data []byte) (*Item, error) {
 	return doc, nil
 }
 
+// Marshal converts a Item of Kind=Document back into its text form, or returns
+// an error.
 func Marshal(doc *Item) ([]byte, error) {
 	if doc.Kind != Document {
 		return nil, errors.New("Item is not a Document")
