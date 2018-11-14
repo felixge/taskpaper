@@ -47,7 +47,6 @@ func Unmarshal(data []byte) (*Item, error) {
 		doc     = &Item{Kind: Document}
 		state   parseState
 		dst     *Item
-		indent  int
 		item    *Item
 		content []byte
 	)
@@ -56,14 +55,12 @@ func Unmarshal(data []byte) (*Item, error) {
 		dst = doc
 		content = nil
 		item = &Item{Kind: Note}
-		indent = 0
 		state = parseIndent
 	}
 
 	addItem := func() {
 		item.Parent = dst
 		item.Content = string(content)
-		item.Indent = indent
 		if item.Kind == Note && strings.HasSuffix(item.Content, ":") {
 			item.Content = strings.TrimSuffix(item.Content, ":")
 			item.Kind = Project
@@ -81,7 +78,7 @@ func Unmarshal(data []byte) (*Item, error) {
 				if len(dst.Children) > 0 {
 					dst = dst.Children[len(dst.Children)-1]
 				} else {
-					indent++
+					item.Indent++
 				}
 			case '-':
 				state = parseTaskPrefix
