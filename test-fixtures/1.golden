@@ -1,13 +1,9 @@
 {
   "Kind": "document",
-  "Content": "",
-  "Indent": 0,
   "Children": [
     {
       "Kind": "task",
-      "Content": "A",
-      "Indent": 0,
-      "Children": null
+      "Content": "A"
     }
   ]
 }

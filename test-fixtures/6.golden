@@ -1,42 +1,31 @@
 {
   "Kind": "document",
-  "Content": "",
-  "Indent": 0,
   "Children": [
     {
       "Kind": "task",
       "Content": "A",
-      "Indent": 0,
       "Children": [
         {
           "Kind": "task",
-          "Content": "B",
-          "Indent": 0,
-          "Children": null
+          "Content": "B"
         },
         {
           "Kind": "task",
           "Content": "C",
-          "Indent": 0,
           "Children": [
             {
               "Kind": "task",
               "Content": "D",
-              "Indent": 0,
               "Children": [
                 {
                   "Kind": "task",
-                  "Content": "E",
-                  "Indent": 0,
-                  "Children": null
+                  "Content": "E"
                 }
               ]
             },
             {
               "Kind": "task",
-              "Content": "F",
-              "Indent": 0,
-              "Children": null
+              "Content": "F"
             }
           ]
         }
@@ -44,15 +33,11 @@
     },
     {
       "Kind": "task",
-      "Content": "G",
-      "Indent": 0,
-      "Children": null
+      "Content": "G"
     },
     {
       "Kind": "task",
-      "Content": "H",
-      "Indent": 0,
-      "Children": null
+      "Content": "H"
     }
   ]
 }
