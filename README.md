@@ -23,6 +23,7 @@ data, _ := json.MarshalIndent(doc, "", "  ")
 fmt.Printf("%s\n", data)
 ```
 ```json
+
 {
   "Kind": "document",
   "Children": [
@@ -36,8 +37,7 @@ fmt.Printf("%s\n", data)
           "Children": [
             {
               "Kind": "task",
-              "Content": "Task B",
-              "Children": null
+              "Content": "Task B"
             }
           ]
         },
@@ -47,8 +47,7 @@ fmt.Printf("%s\n", data)
           "Children": [
             {
               "Kind": "note",
-              "Content": "Some note for Task C",
-              "Children": null
+              "Content": "Some note for Task C"
             }
           ]
         }
@@ -56,6 +55,7 @@ fmt.Printf("%s\n", data)
     }
   ]
 }
+
 ```
 
 # File Format

@@ -20,7 +20,7 @@ type Item struct {
 	Indent int `json:",omitempty"`
 	// Children is the list of all items that are indented by at least one tab
 	// below the current item.
-	Children []*Item
+	Children []*Item `json:",omitempty"`
 	// Parent points to the parent item.
 	Parent *Item `json:"-"`
 }
