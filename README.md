@@ -66,9 +66,18 @@ but no specification for the file format, I decided to define the TaskPaper
 is implemented by this library as follows:
 
 ```
-document = *(item CR) *1item ; the last item has no CR
-item     = (project / task / note)
-project  = *OCTET ":"
-task     = "- " *OCTET
-note     = *OCTET
+; The last item has no trailing CR.
+document  = *(item CR) *1item
+item      = (task / project / note)
+task      = "- " content
+project   = content ":"
+note      = content
+; The first tag needs no space in front of it, and the last tag doesn't need
+; a space after it.
+content   = *1(tag " ") *(" " tag " " / OCTET) *1(" " tag)
+; A tag name or value can be empty which is weird, but you can try it in
+; TaskPaper.
+tag       = "@" tag_name *1("(" tag_value ")")
+tag_name  = *OCTET
+tag_value = *OCTET
 ```
