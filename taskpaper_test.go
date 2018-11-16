@@ -13,20 +13,40 @@ import (
 var gc = goldy.DefaultConfig()
 
 func TestUnmarshalMarshal(t *testing.T) {
-	tests := []string{
-		`- A`,
-		`My Note`,
-		`My Project:`,
-		strings.TrimSpace(`
+	tests := []struct {
+		Name      string
+		TaskPaper string
+	}{
+		{
+			Name:      "single-task",
+			TaskPaper: `- A`,
+		},
+		{
+			Name:      "single-note",
+			TaskPaper: `My Note`,
+		},
+		{
+			Name:      "single-project",
+			TaskPaper: `My Project:`,
+		},
+		{
+			Name: "nested-task",
+			TaskPaper: strings.TrimSpace(`
 - A
 	- B
 `),
-		strings.TrimSpace(`
+		},
+		{
+			Name: "nested-task-indent",
+			TaskPaper: strings.TrimSpace(`
 - A
 		- B
 	- C
 `),
-		strings.TrimSpace(`
+		},
+		{
+			Name: "nested-task-deep",
+			TaskPaper: strings.TrimSpace(`
 - A
 	- B
 	- C
@@ -36,33 +56,35 @@ func TestUnmarshalMarshal(t *testing.T) {
 - G
 - H
 `),
+		},
 	}
 
-	for i, test := range tests {
-		in := []byte(test)
-		doc, err := Unmarshal(in)
-		if err != nil {
-			t.Error(err)
-			continue
-		}
-		jsonDoc, err := json.MarshalIndent(doc, "", "  ")
-		if err != nil {
-			t.Error(err)
-			continue
-		}
+	for _, test := range tests {
+		t.Run(test.Name, func(t *testing.T) {
+			in := []byte(test.TaskPaper)
+			doc, err := Unmarshal(in)
+			if err != nil {
+				t.Error(err)
+				return
+			}
+			jsonDoc, err := json.MarshalIndent(doc, "", "  ")
+			if err != nil {
+				t.Error(err)
+				return
+			}
 
-		fixture := fmt.Sprintf("%d.golden", i+1)
-		if err := gc.GoldenFixture(jsonDoc, fixture); err != nil {
-			t.Error(err)
-			continue
-		}
+			fixture := fmt.Sprintf("%s.golden", test.Name)
+			if err := gc.GoldenFixture(jsonDoc, fixture); err != nil {
+				t.Error(err)
+				return
+			}
 
-		out, err := Marshal(doc)
-		if err != nil {
-			t.Fatal(err)
-		}
-		if !bytes.Equal(in, out) {
-			t.Errorf("\nGot:\n%s\n\nWant:\n%s\n", out, in)
-		}
+			out, err := Marshal(doc)
+			if err != nil {
+				t.Error(err)
+			} else if !bytes.Equal(in, out) {
+				t.Errorf("\nGot:\n%s\n\nWant:\n%s\n", out, in)
+			}
+		})
 	}
 }
