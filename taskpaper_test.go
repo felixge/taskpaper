@@ -74,7 +74,11 @@ func TestUnmarshalMarshal(t *testing.T) {
 			}
 
 			fixture := fmt.Sprintf("%s.golden", test.Name)
-			if err := gc.GoldenFixture(jsonDoc, fixture); err != nil {
+			fixtureData := []byte(fmt.Sprintf("%s\n---\n%s",
+				in,
+				jsonDoc,
+			))
+			if err := gc.GoldenFixture(fixtureData, fixture); err != nil {
 				t.Error(err)
 				return
 			}
